@@ -176,10 +176,24 @@
       0 0 20px #ffd700,
       0 0 30px #ffec8b;
   }
+
   @media (max-width: 900px) {
+    /* Keep both sidebars visible on mobile */
     .side-bar {
-      display: none;
+      font-size: 0.6rem;
+      max-width: 80px;
+      max-height: 90vh;
+      overflow-y: auto;
     }
+    /* Left stays on left */
+    .left-bar {
+      left: 5px;
+    }
+    /* Right stays on right */
+    .right-bar {
+      right: 5px;
+    }
+    /* Main content shrinks as before */
     .main-content {
       padding: 0 20px !important;
     }
@@ -215,7 +229,6 @@
   <span class="clickable" data-key="neal">Neal King</span><br>
   <span class="clickable" data-key="martii">Martti Malmi</span><br>
   <span class="clickable" data-key="shinichi">Shinichi Mochizuki</span>
-
 </div>
 
 <div class="right-bar side-bar" aria-label="Bitcoin Related Terms">
@@ -236,8 +249,12 @@
 <div class="main-content" role="main">
   <h1>SatoshiLord.com</h1>
   <h2>Bitcoin Blessings</h2>
-  <a href="https://sedo.com/search/details/?domain=satoshilord.com" target="_blank" rel="noopener noreferrer" class="cta-button" title="Buy SatoshiLord.com on Sedo for $100,000">Buy Now - $100,000</a>
-  <div id="btc-price" aria-live="polite" aria-atomic="true" role="status">Loading BTC price...</div>
+  <a href="https://sedo.com/search/details/?domain=satoshilord.com" target="_blank" rel="noopener noreferrer" class="cta-button" title="Buy SatoshiLord.com on Sedo for $100,000">
+    Buy Now - $100,000
+  </a>
+  <div id="btc-price" aria-live="polite" aria-atomic="true" role="status">
+    Loading BTC price...
+  </div>
 </div>
 
 <!-- Modal container -->
@@ -252,33 +269,31 @@
 <script>
   // Descriptions for clickable items
   const descriptions = {
-date1: {title: 'October 31, 2008', desc: 'The date the Bitcoin whitepaper was published by Satoshi Nakamoto.'},
-    date2: {title: 'January 3, 2009', desc: 'The date the first Bitcoin block (Genesis Block) was mined.'},
-    paper: {title: 'Bitcoin Whitepaper', desc: 'Bitcoin: A Peer-to-Peer Electronic Cash System, authored by Satoshi Nakamoto.'},
-    
-    satoshi: {title: 'Satoshi Nakamoto', desc: 'Pseudonymous architect of Bitcoin and author of the whitepaper.'},
-    hal: {title: 'Hal Finney', desc: 'Early Bitcoin developer who received the first BTC transaction.'},
-    len: {title: 'Len Sassaman', desc: 'Respected cryptographer linked to Satoshi theories.'},
-    adam: {title: 'Adam Back', desc: 'Inventor of Hashcash, referenced in the Bitcoin whitepaper.'},
-    nick: {title: 'Nick Szabo', desc: 'Originator of smart contracts; theorized “bit gold.”'},
-    wei: {title: 'Wei Dai', desc: 'Creator of b-money, cited by Satoshi as inspiration.'},
-    gavin: {title: 'Gavin Andresen', desc: 'Took over Bitcoin’s development after Satoshi’s exit.'},
-    neal: {title: 'Neal King', desc: 'Patent co-author with theories linking him to Satoshi.'},
-    martii: {title: 'Martti Malmi', desc: 'Known as “Sirius”; helped run Bitcoin.org with Satoshi.'},
-    shinichi: {title: 'Shinichi Mochizuki', desc: 'Mathematician behind IUT theory; some claim he is Satoshi.'},
-
-    hodl: {title: 'HODL', desc: 'A Bitcoin meme-turned-strategy: “Hold On for Dear Life.”'},
-    sha256: {title: 'SHA-256', desc: 'The cryptographic hash algorithm that secures Bitcoin.'},
-    genesis: {title: 'Genesis Block', desc: 'The first block in the Bitcoin blockchain, mined by Satoshi.'},
-    pow: {title: 'Proof of Work', desc: 'Bitcoin’s consensus method using computation to secure the network.'},
-    lightning: {title: 'Lightning Network', desc: 'Bitcoin’s second-layer solution for faster, cheaper transactions.'},
-    consensus: {title: 'Nakamoto Consensus', desc: 'A decentralized protocol for nodes to agree on the valid chain.'},
-    seed: {title: 'Seed Phrase', desc: 'A series of words used to back up and recover a Bitcoin wallet.'},
-    coldwallet: {title: 'Cold Wallet', desc: 'Offline Bitcoin storage to prevent hacks and theft.'},
-    halving: {title: 'Halving', desc: 'Recurring event that cuts mining rewards in half to limit supply.'},
-    utxo: {title: 'UTXO', desc: 'Unspent Transaction Output — what makes Bitcoin’s accounting work.'},
-    blockheight: {title: 'Block Height', desc: 'The number of blocks since the Genesis Block.'},
-    digitalgold: {title: 'Digital Gold', desc: 'A nickname for Bitcoin as a scarce store of value like gold.'}
+    date1:    { title: 'October 31, 2008', desc: 'The date the Bitcoin whitepaper was published by Satoshi Nakamoto.' },
+    date2:    { title: 'January 3, 2009',    desc: 'The date the first Bitcoin block (Genesis Block) was mined.' },
+    paper:    { title: 'Bitcoin Whitepaper', desc: 'Bitcoin: A Peer-to-Peer Electronic Cash System, authored by Satoshi Nakamoto.' },
+    satoshi:  { title: 'Satoshi Nakamoto',    desc: 'Pseudonymous architect of Bitcoin and author of the whitepaper.' },
+    hal:      { title: 'Hal Finney',          desc: 'Early Bitcoin developer who received the first BTC transaction.' },
+    adam:     { title: 'Adam Back',           desc: 'Inventor of Hashcash, referenced in the Bitcoin whitepaper.' },
+    nick:     { title: 'Nick Szabo',          desc: 'Originator of smart contracts; theorized “bit gold.”' },
+    wei:      { title: 'Wei Dai',             desc: 'Creator of b-money, cited by Satoshi as inspiration.' },
+    gavin:    { title: 'Gavin Andresen',      desc: 'Took over Bitcoin’s development after Satoshi’s exit.' },
+    len:      { title: 'Len Sassaman',        desc: 'Respected cryptographer linked to Satoshi theories.' },
+    neal:     { title: 'Neal King',           desc: 'Patent co-author with theories linking him to Satoshi.' },
+    martii:   { title: 'Martti Malmi',        desc: 'Known as “Sirius”; helped run Bitcoin.org with Satoshi.' },
+    shinichi: { title: 'Shinichi Mochizuki',  desc: 'Mathematician behind IUT theory; some claim he is Satoshi.' },
+    hodl:        { title: 'HODL',            desc: 'A Bitcoin meme-turned-strategy: “Hold On for Dear Life.”' },
+    sha256:      { title: 'SHA-256',         desc: 'The cryptographic hash algorithm that secures Bitcoin.' },
+    genesis:     { title: 'Genesis Block',   desc: 'The first block in the Bitcoin blockchain, mined by Satoshi.' },
+    pow:         { title: 'Proof of Work',   desc: 'Bitcoin’s consensus method using computation to secure the network.' },
+    lightning:   { title: 'Lightning Network', desc: 'Bitcoin’s second-layer solution for faster, cheaper transactions.' },
+    consensus:   { title: 'Nakamoto Consensus', desc: 'A decentralized protocol for nodes to agree on the valid chain.' },
+    seed:        { title: 'Seed Phrase',      desc: 'A series of words used to back up and recover a Bitcoin wallet.' },
+    coldwallet:  { title: 'Cold Wallet',      desc: 'Offline Bitcoin storage to prevent hacks and theft.' },
+    halving:     { title: 'Halving',          desc: 'Recurring event that cuts mining rewards in half to limit supply.' },
+    utxo:        { title: 'UTXO',             desc: 'Unspent Transaction Output — what makes Bitcoin’s accounting work.' },
+    blockheight: { title: 'Block Height',     desc: 'The number of blocks since the Genesis Block.' },
+    digitalgold: { title: 'Digital Gold',     desc: 'A nickname for Bitcoin as a scarce store of value like gold.' }
   };
 
   // Modal Elements
@@ -289,7 +304,7 @@ date1: {title: 'October 31, 2008', desc: 'The date the Bitcoin whitepaper was pu
 
   // Event delegation for clickable items
   document.body.addEventListener('click', (e) => {
-    if(e.target.classList.contains('clickable')) {
+    if (e.target.classList.contains('clickable')) {
       const key = e.target.getAttribute('data-key');
       if (descriptions[key]) {
         modalTitle.textContent = descriptions[key].title;
@@ -305,7 +320,7 @@ date1: {title: 'October 31, 2008', desc: 'The date the Bitcoin whitepaper was pu
 
   // Close modal on outside click
   window.addEventListener('click', (e) => {
-    if(e.target === modal) {
+    if (e.target === modal) {
       modal.style.display = 'none';
     }
   });
@@ -316,8 +331,10 @@ date1: {title: 'October 31, 2008', desc: 'The date the Bitcoin whitepaper was pu
     try {
       const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
       const data = await response.json();
-      if(data.bitcoin && data.bitcoin.usd) {
-        const price = data.bitcoin.usd.toLocaleString('en-US', {style:'currency', currency:'USD', minimumFractionDigits: 0});
+      if (data.bitcoin && data.bitcoin.usd) {
+        const price = data.bitcoin.usd.toLocaleString('en-US', {
+          style: 'currency', currency: 'USD', minimumFractionDigits: 0
+        });
         btcPriceElem.textContent = `BTC Price (USD): ${price}`;
       } else {
         btcPriceElem.textContent = 'BTC price unavailable';
