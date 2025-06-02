@@ -252,32 +252,33 @@
 <script>
   // Descriptions for clickable items
   const descriptions = {
-    date1: {title: 'October 31, 2008', desc: 'The date the Bitcoin whitepaper was published by Satoshi Nakamoto.'},
-    date2: {title: 'January 3, 2009', desc: 'The date of the first Bitcoin block (Genesis Block) mined.'},
+date1: {title: 'October 31, 2008', desc: 'The date the Bitcoin whitepaper was published by Satoshi Nakamoto.'},
+    date2: {title: 'January 3, 2009', desc: 'The date the first Bitcoin block (Genesis Block) was mined.'},
     paper: {title: 'Bitcoin Whitepaper', desc: 'Bitcoin: A Peer-to-Peer Electronic Cash System, authored by Satoshi Nakamoto.'},
-    satoshi: {title: 'Satoshi Nakamoto', desc: 'The pseudonymous creator of Bitcoin.'},
-    hal: {title: 'Hal Finney', desc: 'One of the first people involved with Bitcoin development.'},
-    len: {title: 'Len Sassaman', desc: 'A notable cryptographer associated with Bitcoin.'},
-    adam: {title: 'Adam Back', desc: 'Inventor of Hashcash and early Bitcoin contributor.'},
-    nick: {title: 'Nick Szabo', desc: 'Pioneer of smart contracts and digital currency concepts.'},
-    wei: {title: 'Wei Dai', desc: 'Creator of b-money and early Bitcoin influence.'},
-    gavin: {title: 'Gavin Andresen', desc: 'Lead developer for Bitcoin after Satoshi.'},
-    craig: {title: 'Craig Wright', desc: 'Controversial figure claiming to be Satoshi.'},
-    neal: {title: 'Neal King', desc: 'Co-author of a patent cited in Bitcoin research.'},
-    martii: {title: 'Martti Malmi', desc: 'Early Bitcoin developer known as "Sirius".'},
-    shinichi: {title: 'Shinichi Mochizuki', desc: 'Mathematician known for Inter-universal Teichmüller theory.'},
-    hodl: {title: 'HODL', desc: 'A Bitcoin slang for "hold", meaning to keep coins.'},
-    sha256: {title: 'SHA-256', desc: 'The cryptographic hash function used by Bitcoin.'},
-    genesis: {title: 'Genesis Block', desc: 'The first block ever mined in the Bitcoin blockchain.'},
-    pow: {title: 'Proof of Work', desc: 'The consensus mechanism Bitcoin uses to validate transactions.'},
-    lightning: {title: 'Lightning Network', desc: 'A second layer protocol for fast Bitcoin transactions.'},
-    consensus: {title: 'Nakamoto Consensus', desc: 'Bitcoin\'s mechanism to achieve decentralized agreement.'},
-    seed: {title: 'Seed Phrase', desc: 'A list of words used to recover a Bitcoin wallet.'},
-    coldwallet: {title: 'Cold Wallet', desc: 'Offline storage for Bitcoin to prevent theft.'},
-    halving: {title: 'Halving', desc: 'Event that reduces Bitcoin mining rewards by half.'},
-    utxo: {title: 'UTXO', desc: 'Unspent Transaction Output, a key Bitcoin concept.'},
-    blockheight: {title: 'Block Height', desc: 'The number of blocks in the blockchain.'},
-    digitalgold: {title: 'Digital Gold', desc: 'A nickname for Bitcoin reflecting its value store.'}
+    
+    satoshi: {title: 'Satoshi Nakamoto', desc: 'Pseudonymous architect of Bitcoin and author of the whitepaper.'},
+    hal: {title: 'Hal Finney', desc: 'Early Bitcoin developer who received the first BTC transaction.'},
+    len: {title: 'Len Sassaman', desc: 'Respected cryptographer linked to Satoshi theories.'},
+    adam: {title: 'Adam Back', desc: 'Inventor of Hashcash, referenced in the Bitcoin whitepaper.'},
+    nick: {title: 'Nick Szabo', desc: 'Originator of smart contracts; theorized “bit gold.”'},
+    wei: {title: 'Wei Dai', desc: 'Creator of b-money, cited by Satoshi as inspiration.'},
+    gavin: {title: 'Gavin Andresen', desc: 'Took over Bitcoin’s development after Satoshi’s exit.'},
+    neal: {title: 'Neal King', desc: 'Patent co-author with theories linking him to Satoshi.'},
+    martii: {title: 'Martti Malmi', desc: 'Known as “Sirius”; helped run Bitcoin.org with Satoshi.'},
+    shinichi: {title: 'Shinichi Mochizuki', desc: 'Mathematician behind IUT theory; some claim he is Satoshi.'},
+
+    hodl: {title: 'HODL', desc: 'A Bitcoin meme-turned-strategy: “Hold On for Dear Life.”'},
+    sha256: {title: 'SHA-256', desc: 'The cryptographic hash algorithm that secures Bitcoin.'},
+    genesis: {title: 'Genesis Block', desc: 'The first block in the Bitcoin blockchain, mined by Satoshi.'},
+    pow: {title: 'Proof of Work', desc: 'Bitcoin’s consensus method using computation to secure the network.'},
+    lightning: {title: 'Lightning Network', desc: 'Bitcoin’s second-layer solution for faster, cheaper transactions.'},
+    consensus: {title: 'Nakamoto Consensus', desc: 'A decentralized protocol for nodes to agree on the valid chain.'},
+    seed: {title: 'Seed Phrase', desc: 'A series of words used to back up and recover a Bitcoin wallet.'},
+    coldwallet: {title: 'Cold Wallet', desc: 'Offline Bitcoin storage to prevent hacks and theft.'},
+    halving: {title: 'Halving', desc: 'Recurring event that cuts mining rewards in half to limit supply.'},
+    utxo: {title: 'UTXO', desc: 'Unspent Transaction Output — what makes Bitcoin’s accounting work.'},
+    blockheight: {title: 'Block Height', desc: 'The number of blocks since the Genesis Block.'},
+    digitalgold: {title: 'Digital Gold', desc: 'A nickname for Bitcoin as a scarce store of value like gold.'}
   };
 
   // Modal Elements
