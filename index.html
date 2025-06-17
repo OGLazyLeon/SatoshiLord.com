@@ -260,6 +260,9 @@
     <div id="btc-price" class="cta-button" aria-live="polite" aria-atomic="true" role="status">
       Loading BTC price...
     </div>
+<div style="margin-top: 1rem;">
+  <button class="cta-button" onclick="openChart()">Bitcoin Chart</button>
+</div>
   </div>
 
   <!-- Modal container -->
@@ -356,5 +359,54 @@
     fetchBTCPrice();
     setInterval(fetchBTCPrice, 60000);
   </script>
+<div class="modal-bg" id="chartModal" onclick="closeChart(event)">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <button class="close-btn" onclick="closeChart(event)">&times;</button>
+    <canvas id="btcChartCanvas" style="width:100%; height:400px;"></canvas>
+  </div>
+</div>
+<!-- Chart.js Library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Bitcoin Chart Logic -->
+<script>
+  let btcChart;
+  async function renderChart() {
+    try {
+      const res = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=1');
+      const data = await res.json();
+      const labels = data.prices.map(p => new Date(p[0]).toLocaleTimeString());
+      const prices = data.prices.map(p => p[1]);
+      const ctx = document.getElementById('btcChartCanvas').getContext('2d');
+      btcChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [{
+            label: 'BTC Price (USD)',
+            data: prices,
+            tension: 0.1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      });
+    } catch (err) {
+      console.error('Chart load error', err);
+    }
+  }
+
+  function openChart() {
+    document.getElementById('chartModal').style.display = 'flex';
+    if (!btcChart) renderChart();
+  }
+
+  function closeChart(event) {
+    document.getElementById('chartModal').style.display = 'none';
+  }
+</script>
+
 </body>
 </html>
